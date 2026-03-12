@@ -7,11 +7,13 @@ langchain-mcp-adapters>=0.2.1
 langchain-chroma>=1.1.0
 langgraph-checkpoint>=4.0.0
 langgraph-sdk>=0.3.3
+langchain-checkpoint-sqlite
 
 
 chromadb>=0.5.0
 pypdf>=4.3.0
 tiktoken>=0.7.0
+sqlite3
 
 
 tavily-python>=0.6.0
