@@ -1,6 +1,6 @@
 from agents.base import BaseAgent
 
-class WriterAgent(BaseAgent):
+class ReportAgent(BaseAgent):
     def __init__(self):
         # 创作者需要一定的发散性，temperature 设为 0.5
         super().__init__(role_name="Lead_Writer", temperature=0.5)
@@ -19,3 +19,4 @@ class WriterAgent(BaseAgent):
         
     async def ainvoke(self, state_messages):
         return await self.chain.ainvoke({"messages": state_messages})
+
