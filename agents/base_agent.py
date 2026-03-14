@@ -4,8 +4,16 @@ from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 
 class BaseAgent:
     def __init__(self, role_name: str, model_name: str = "unsloth/Qwen2.5-1.5B-Instruct", temperature: float = 0.2):
+        # 确保环境变量中已配置 OPENAI_API_KEY 和 OPENAI_BASE_URL
+        openai_api_key = os.getenv("OPENAI_API_KEY")
+        openai_base_url = os.getenv("OPENAI_BASE_URL")
+        if not openai_api_key:
+            raise ValueError("⚠️ 缺少 OPENAI_API_KEY 环境变量")
+        if not openai_base_url:
+            raise ValueError("⚠️ 缺少 OPENAI_BASE_URL 环境变量")
+
         self.role_name = role_name
-        # 生产级项目必须配置 max_retries 处理网络波动
+        # 配置 max_retries 处理网络波动
         self.llm = ChatOpenAI(
             model=model_name, 
             # base_url="https://xishaoji-my-llmtest.hf.space/v1", 
@@ -22,5 +30,5 @@ class BaseAgent:
         """
         return ChatPromptTemplate.from_messages([
             ("system", system_message),
-            MessagesPlaceholder(variable_name="chat_history"),
+            MessagesPlaceholder(variable_name="messages"),
         ])

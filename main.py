@@ -1,12 +1,18 @@
+from dotenv import load_dotenv
+
+# 加载环境变量
+load_dotenv()
+
 import streamlit as st
 import asyncio
 import uuid
 from core.graph import build_research_agent
 from langchain_core.messages import HumanMessage, AIMessage
 
+
 # --- 页面配置 ---
 st.set_page_config(page_title="AI Research Copilot", page_icon="🧠", layout="wide")
-st.title("🧠 深度研究 AI 代理系统 (Startup 版)")
+st.title("AI Research Copilot")
 
 # --- 初始化 Session State ---
 # 赋予每个访客独立的 Thread ID，实现记忆隔离

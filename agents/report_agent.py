@@ -1,9 +1,9 @@
-from agents.base import BaseAgent
+from agents.base_agent import BaseAgent
 
 class ReportAgent(BaseAgent):
-    def __init__(self):
+    def __init__(self, model_name: str = "unsloth/Qwen2.5-1.5B-Instruct"):
         # 创作者需要一定的发散性，temperature 设为 0.5
-        super().__init__(role_name="Lead_Writer", temperature=0.5)
+        super().__init__(role_name="Lead_Writer", temperature=0.5, model_name=model_name)
         
         self.system_prompt = """
         你是一名科学期刊的专业主笔。
