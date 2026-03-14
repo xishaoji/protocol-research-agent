@@ -11,12 +11,13 @@ class ReportAgent(BaseAgent):
         
         【排版要求】：
         1. 必须使用 Markdown 格式。
-        2. 必须包含：执行摘要、核心发现、数据支撑、未来展望。
+        2. 必须包含：内容摘要、核心发现、数据支撑、未来展望。
         3. 语言风格：专业、克制、富有逻辑。
         """
         self.prompt_template = self.get_prompt_template(self.system_prompt)
         self.chain = self.prompt_template | self.llm
         
     async def ainvoke(self, state_messages):
+        print(f"✅ [ReportAgent] 执行成功: {state_messages[-1].content[:100]}...")
         return await self.chain.ainvoke({"messages": state_messages})
 
