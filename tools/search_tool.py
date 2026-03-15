@@ -51,14 +51,3 @@ def search_web(query: str) -> str:
     except Exception as e:
         # 自愈机制：搜索失败时返回明确的错误，让 Agent 决定是否重试或换词
         return json.dumps({"error": f"搜索服务暂时不可用，原因: {str(e)}。请尝试使用其他工具或修改搜索策略。"})
-
-
-# ==========================================
-# 3. 导出供 Graph 使用
-# ==========================================
-# 把定义好的工具放进列表里
-tools = [search_web] 
-
-# 在你的 agent 文件中，你只需要这样做：
-# from research_tools import tools
-# workflow.add_node("tools", ToolNode(tools))

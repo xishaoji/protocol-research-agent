@@ -12,7 +12,7 @@ from langchain_core.messages import HumanMessage, AIMessage
 
 # --- 页面配置 ---
 st.set_page_config(page_title="Protocol Solution Tool ", page_icon="🧠", layout="wide")
-st.title("Protocol Solution Tool ")
+st.title("Protocol Solution Tool\n powered by LangGraph & Qwen2.5")
 
 # --- 初始化 Session State ---
 # 赋予每个访客独立的 Thread ID，实现记忆隔离
