@@ -4,6 +4,7 @@ from langgraph.prebuilt import ToolNode, tools_condition # 引入官方现成的
 # from langgraph.checkpoint.sqlite import SqliteSaver # 引入 SQLite 持久化模块
 from langgraph.checkpoint.redis import RedisSaver # 引入 Redis 持久化模块
 import sqlite3
+from langchain_core.messages import SystemMessage
 
 
 from core.state import AgentState
@@ -14,8 +15,10 @@ def build_research_agent():
 
     def should_continue(state: AgentState) -> Literal["tools", "report"]:
             last_message = state["messages"][-1]
-            if last_message.tool_calls:
+            if hasattr(last_message, "tool_calls") and last_message.tool_calls:
                 return "tools"
+            if isinstance(last_message, SystemMessage):
+                print("⚠️ [Router] 收到系统消息，强制进入写作阶段")
             return "report"
 
     workflow = StateGraph(AgentState)

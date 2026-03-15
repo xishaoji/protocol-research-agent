@@ -62,12 +62,3 @@ def search_internal_docs(query: str) -> str:
         
     except Exception as e:
         return json.dumps({"error": f"本地知识库读取失败: {str(e)}"})
-
-# ==========================================
-# 3. 导出供 Graph 使用
-# ==========================================
-# 将工具放入列表，方便在其他文件中导入
-tools = [search_internal_docs]
-
-# 在其他文件中使用：
-# from your_rag_file import tools as rag_tools

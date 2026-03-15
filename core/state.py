@@ -7,7 +7,7 @@ import operator
 class AgentState(TypedDict):
     # 使用 add_messages 自动管理对话历史
     messages: Annotated[List[BaseMessage], add_messages]
-    search_count: Annotated[int, operator.add]
+    search_count: int
     # 结构化字段
     query: str
     research_targets: List[str]  # 分解后的研究子任务
