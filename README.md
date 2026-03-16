@@ -1,7 +1,7 @@
 # 对话&本地协议分析助手
 
 
-本项目是一个基于 **LangGraph** 构建的简单 AI Agent 框架，通过多智能体协作（Multi-Agent Collaboration）自动化执行的网络调研与本地知识查询工作。使用了图结构状态机、长短期记忆持久化以及动态工具路由。
+该项目是一个基于 **LangGraph** 构建的简单 AI Agent 框架，通过多智能体协作（Multi-Agent Collaboration）自动化执行的网络调研与本地知识查询工作。使用了图结构状态机、长短期记忆持久化以及动态工具路由。
 ## ✨ 核心特性
 
 * **🤖 多智能体架构**：分为 `Researcher`（工具调用与资料搜集）与 `Writer`（深度报告撰写）节点.。
@@ -27,8 +27,10 @@ git clone [https://github.com/yourusername/agentic-research-copilot.git]([text](
 cd agentic-research-copilot
 python -m venv venv
 source venv/bin/activate  # Windows 下使用 venv\Scripts\activate
+
 pip install -r requirements.txt
 ```
+
 
 
 ### 2. 环境变量设置
@@ -37,7 +39,9 @@ pip install -r requirements.txt
 OPENAI_API_KEY="sk-xxxx"
 OPENAI_BASE_URL="[https://api.openai.com/v1](https://api.openai.com/v1)" # 可替换为第三方模型 API
 TAVILY_API_KEY="tvly-xxxx"
+
 ```
+
 ### 3. 构建本地知识库 (可选)
 将本地 PDF 文档放入 data/ 目录，然后运行：
 ```Bash
@@ -60,4 +64,3 @@ streamlit run app.py
 ```
 
 ![alt text](d638f0866d629062cf69110fc72528b.png)
-
