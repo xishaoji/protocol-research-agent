@@ -28,25 +28,28 @@ cd agentic-research-copilot
 python -m venv venv
 source venv/bin/activate  # Windows 下使用 venv\Scripts\activate
 pip install -r requirements.txt
+```
+
 
 ### 2. 环境变量设置
 在根目录创建 .env 文件并填入以下参数：
-
-代码段
+```bash
 OPENAI_API_KEY="sk-xxxx"
 OPENAI_BASE_URL="[https://api.openai.com/v1](https://api.openai.com/v1)" # 可替换为第三方模型 API
 TAVILY_API_KEY="tvly-xxxx"
+```
 ### 3. 构建本地知识库 (可选)
-将私有 PDF 文档放入 data/ 目录，然后运行：
-
-Bash
+将本地 PDF 文档放入 data/ 目录，然后运行：
+```Bash
 python scripts/ingest_data.py
+```
 ### 4. 启动服务
-Bash
+```Bash
 streamlit run app.py
+```
 文件结构
 
-Plaintext
+```Plaintext
 ├── agents/             # 代理助手
 ├── core/               # 框架结构
 ├── tools/              # 自定义工具集 (RAG 检索、Tavily 搜索等)
@@ -54,5 +57,7 @@ Plaintext
 ├── scripts/            # 离线数据注入与向量化脚本
 ├── app.py              # 主程序入口
 └── requirements.txt    # 依赖清单
+```
 
 ![alt text](d638f0866d629062cf69110fc72528b.png)
+
