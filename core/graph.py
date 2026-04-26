@@ -10,16 +10,19 @@ from langchain_core.messages import SystemMessage
 from core.state import AgentState
 from core.nodes import GraphNodes, AVAILABLE_TOOLS
 
+
+def should_continue(state: AgentState) -> Literal["tools", "report"]:
+    """Route decision: tools if LLM requested them, otherwise report."""
+    last_message = state["messages"][-1]
+    if hasattr(last_message, "tool_calls") and last_message.tool_calls:
+        return "tools"
+    if isinstance(last_message, SystemMessage):
+        print("⚠️ [Router] 收到系统消息，强制进入写作阶段")
+    return "report"
+
+
 def build_research_agent():
     nodes = GraphNodes(model_name="deepseek-chat")
-
-    def should_continue(state: AgentState) -> Literal["tools", "report"]:
-            last_message = state["messages"][-1]
-            if hasattr(last_message, "tool_calls") and last_message.tool_calls:
-                return "tools"
-            if isinstance(last_message, SystemMessage):
-                print("⚠️ [Router] 收到系统消息，强制进入写作阶段")
-            return "report"
 
     workflow = StateGraph(AgentState)
     
