@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -m pytest tests/unit/test_state.py -v)",
+      "Bash(pip list *)",
+      "Bash(\".venv/Scripts/pip\" install *)",
+      "Bash(\".venv/Scripts/pytest\" tests/unit/test_state.py -v)",
+      "Bash(\".venv/Scripts/pytest\" tests/unit/test_base_agent.py tests/unit/test_state.py -v)",
+      "Bash(\".venv/Scripts/pytest\" tests/unit/test_search_tool.py -v)",
+      "Bash(\".venv/Scripts/pytest\" tests/unit/test_rag_tool.py -v)",
+      "Bash(\".venv/Scripts/pytest\" tests/unit/test_nodes.py -v)",
+      "Bash(\".venv/Scripts/pytest\" tests/ -v)",
+      "Bash(git commit -m ' *)"
+    ]
+  }
+}
