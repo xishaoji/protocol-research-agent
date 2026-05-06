@@ -168,6 +168,12 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
+# FAISS vector database (regenerate via scripts/ingest_data.py)
+faiss_db/
+
+# SQLite artifacts
+agent_memory.db
+
 # PyCharm
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
 #  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore

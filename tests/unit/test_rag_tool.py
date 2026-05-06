@@ -11,7 +11,9 @@ from unittest.mock import Mock, patch, MagicMock
 
 @pytest.fixture(autouse=True)
 def setup_env():
-    """Set required env vars and prevent FAISS loading at import."""
+    """Set required env vars and reset lazy init state before each test."""
+    import tools.rag_tool
+    tools.rag_tool._initialized = False
     with patch.dict('os.environ', {'OPENAI_API_KEY': 'test-key'}, clear=False):
         with patch('os.path.exists', return_value=False):
             yield

@@ -1,8 +1,8 @@
 """
 Unit tests for search_tool.py
 
-search_tool checks TAVILY_API_KEY at import time.
-The @tool decorator returns a StructuredTool - use .invoke().
+search_tool uses lazy initialization for the Tavily client.
+We patch _get_search_client to return a mock client.
 """
 import pytest
 import json
@@ -25,10 +25,10 @@ def test_search_web_success():
         {"title": "Test B", "url": "https://ex.com/b", "content": "Content B"}
     ]
 
-    # Patch the search_client *instance* directly, since it's created at module level
-    with patch('tools.search_tool.search_client') as mock_client:
-        mock_client.invoke.return_value = mock_results
+    mock_client = Mock()
+    mock_client.invoke.return_value = mock_results
 
+    with patch('tools.search_tool._get_search_client', return_value=mock_client):
         result = search_web.invoke({"query": "test query"})
         result_data = json.loads(result)
 
@@ -41,9 +41,10 @@ def test_search_web_api_failure():
     """Test error handling on API failure."""
     from tools.search_tool import search_web
 
-    with patch('tools.search_tool.search_client') as mock_client:
-        mock_client.invoke.side_effect = Exception("API Error")
+    mock_client = Mock()
+    mock_client.invoke.side_effect = Exception("API Error")
 
+    with patch('tools.search_tool._get_search_client', return_value=mock_client):
         result = search_web.invoke({"query": "test"})
         result_data = json.loads(result)
 
@@ -54,9 +55,10 @@ def test_search_web_empty_results():
     """Test search with empty results."""
     from tools.search_tool import search_web
 
-    with patch('tools.search_tool.search_client') as mock_client:
-        mock_client.invoke.return_value = []
+    mock_client = Mock()
+    mock_client.invoke.return_value = []
 
+    with patch('tools.search_tool._get_search_client', return_value=mock_client):
         result = search_web.invoke({"query": "empty"})
         result_data = json.loads(result)
 
@@ -72,9 +74,10 @@ def test_search_web_content_truncation():
         "title": "Long", "url": "https://ex.com/l", "content": long_content
     }]
 
-    with patch('tools.search_tool.search_client') as mock_client:
-        mock_client.invoke.return_value = mock_results
+    mock_client = Mock()
+    mock_client.invoke.return_value = mock_results
 
+    with patch('tools.search_tool._get_search_client', return_value=mock_client):
         result = search_web.invoke({"query": "long"})
         result_data = json.loads(result)
 
