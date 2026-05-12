@@ -10,7 +10,13 @@
       "Bash(\".venv/Scripts/pytest\" tests/unit/test_rag_tool.py -v)",
       "Bash(\".venv/Scripts/pytest\" tests/unit/test_nodes.py -v)",
       "Bash(\".venv/Scripts/pytest\" tests/ -v)",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "Bash(python -m pytest tests/ -v --tb=short)",
+      "Bash(ls .venv/Scripts/python.exe)",
+      "Bash(ls .venv/bin/python)",
+      "Bash(.venv/Scripts/python.exe -m pytest tests/ -v --tb=short)",
+      "Bash(git add *)",
+      "Bash(git push *)"
     ]
   }
 }
